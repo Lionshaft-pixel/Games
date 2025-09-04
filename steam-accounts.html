@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Steam Accounts | PirateHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* === Global Styles === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #111;
+      color: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .main-container {
+      display: flex;
+      flex: 1;
+    }
+
+    /* === Ad Blocker Detection Overlay === */
+    #adblockOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .adblock-content {
+      background: #1b1b1b;
+      padding: 30px;
+      border-radius: 12px;
+      border: 2px solid #00ffc3;
+      max-width: 600px;
+    }
+
+    .adblock-content h2 {
+      color: #ff3366;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .adblock-content p {
+      margin-bottom: 15px;
+      color: #ccc;
+    }
+
+    .adblock-content button {
+      background: #00ffc3;
+      color: #000;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    /* === Navigation === */
+    nav {
+      background-color: #1b1b1b;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 2px solid #00ffc3;
+      position: relative;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo i {
+      font-size: 28px;
+      margin-right: 10px;
+      color: #00ffc3;
+    }
+
+    .logo h1 {
+      color: #00ffc3;
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #ccc;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #00ffc3;
+    }
+
+    /* === Ad Containers === */
+    .ad-container {
+      background: #1c1c1c;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ad-label {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #00ffc3;
+      color: #000;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+
+    .header-ad {
+      width: 100%;
+      min-height: 90px;
+      margin: 0;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+
+    .sidebar {
+      width: 300px;
+      background: #1a1a1a;
+      padding: 20px;
+      border-left: 1px solid #333;
+    }
+
+    .sidebar-ad {
+      min-height: 600px;
+      margin-bottom: 20px;
+    }
+
+    .popup-ad {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      background: #1b1b1b;
+      border: 2px solid #00ffc3;
+      border-radius: 8px;
+      padding: 15px;
+      z-index: 99;
+      box-shadow: 0 0 20px rgba(0, 255, 195, 0.3);
+      display: none;
+    }
+
+    .popup-ad .close {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    /* === Video Ad Container === */
+    .video-ad-container {
+      width: 100%;
+      height: 300px;
+      margin: 20px 0;
+      background: #1c1c1c;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-ad-label {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #00ffc3;
+      color: #000;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 3px;
+      z-index: 2;
+    }
+
+    /* === Main Content === */
+    .container {
+      flex: 1;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
+      position: relative;
+    }
+
+    /* === Page Header === */
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-header h2 {
+      font-size: 2.5rem;
+      color: #00ffc3;
+      margin-bottom: 10px;
+    }
+
+    .page-header p {
+      color: #bbb;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    /* === Account Cards Grid === */
+    .accounts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    .account-card {
+      background-color: #1c1c1c;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 255, 195, 0.1);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .account-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .account-card a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .account-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .account-content {
+      padding: 15px;
+    }
+
+    .account-title {
+      font-size: 1.3rem;
+      color: #00ffc3;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .account-details {
+      color: #bbb;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    /* === Footer === */
+    footer {
+      margin-top: auto;
+      padding: 40px 20px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      background-color: #1b1b1b;
+      border-top: 2px solid #00ffc3;
+    }
+
+    .support-devs {
+      margin-top: 10px;
+      color: #00ffc3;
+      font-style: italic;
+    }
+
+    /* === Responsive Design === */
+    @media (max-width: 1024px) {
+      .accounts-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .sidebar {
+        width: 250px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .main-container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid #333;
+        order: 2;
+      }
+      
+      .sidebar-ad {
+        min-height: 250px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+      
+      .accounts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .popup-ad {
+        width: 250px;
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+  </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3857250497763440"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Ad Blocker Detection Overlay -->
+  <div id="adblockOverlay">
+    <div class="adblock-content">
+      <h2><i class="fas fa-exclamation-triangle"></i> Ad Blocker Detected!</h2>
+      <p>Our website is made possible by displaying ads to our visitors.</p>
+      <p>Please support us by disabling your ad blocker or adding our site to your whitelist.</p>
+      <p>You won't be able to use this site until you disable your ad blocker.</p>
+      <button onclick="checkAdBlockAgain()">I've disabled my ad blocker</button>
+    </div>
+  </div>
+
+  <!-- Header Ad -->
+  <div class="ad-container header-ad">
+    <span class="ad-label">AD</span>
+    <div id="header-ad-content">
+      <!-- Header ad will be loaded here -->
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">
+      <i class="fas fa-skull-crossbones"></i>
+      <h1>PirateHub</h1>
+    </a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="all-games.html">All Games</a></li>
+      <li><a href="steam-accounts.html" class="active">Steam Accounts!</a></li>
+      <li><a href="request-game.html">Request Game</a></li>
+      <li><a href="donate.html">Donate</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <div class="container">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h2><i class="fab fa-steam"></i> Premium Steam Accounts</h2>
+        <p>Get access to hundreds of games with our premium Steam accounts!</p>
+      </div>
+
+      <!-- Video Ad -->
+      <div class="video-ad-container">
+        <span class="video-ad-label">VIDEO AD</span>
+        <div id="video-ad-content">
+          <!-- Video ad will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Accounts Grid -->
+      <div class="accounts-grid">
+        <!-- Account Card 1 -->
+        <div class="account-card">
+          <a href="account-detail.html?id=1">
+            <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/1091500/2b6d07c777d327bf6d0f29ef3c0d6c3d5b2b6c5f.jpg" alt="Cyberpunk 2077 Account">
+            <div class="account-content">
+              <div class="account-title">Cyberpunk 2077 Ultimate</div>
+              <div class="account-details">Includes all DLCs + 100+ hours gameplay</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Account Card 2 -->
+        <div class="account-card">
+          <a href="account-detail.html?id=2">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg" alt="The Witcher 3 Account">
+            <div class="account-content">
+              <div class="account-title">The Witcher 3: Complete</div>
+              <div class="account-details">Game of the Year Edition + all expansions</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Account Card 3 -->
+        <div class="account-card">
+          <a href="account-detail.html?id=3">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg" alt="GTA V Account">
+            <div class="account-content">
+              <div class="account-title">GTA V Premium</div>
+              <div class="account-details">Includes game + $50M in-game money</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Account Card 4 -->
+        <div class="account-card">
+          <a href="account-detail.html?id=4">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring Account">
+            <div class="account-content">
+              <div class="account-title">Elden Ring Deluxe</div>
+              <div class="account-details">Complete game + all achievements unlocked</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Account Card 5 -->
+        <div class="account-card">
+          <a href="account-detail.html?id=5">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg" alt="Red Dead Redemption 2 Account">
+            <div class="account-content">
+              <div class="account-title">RDR2: Ultimate Edition</div>
+              <div class="account-details">Story completed + all weapons unlocked</div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Account Card 6 -->
+        <div class="account-card">
+          <a href="account-detail.html?id=6">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg" alt="Baldur's Gate 3 Account">
+            <div class="account-content">
+              <div class="account-title">Baldur's Gate 3 Complete</div>
+              <div class="account-details">All characters unlocked + max level</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar with Ads -->
+    <div class="sidebar">
+      <div class="ad-container sidebar-ad">
+        <span class="ad-label">AD</span>
+        <div id="sidebar-ad-content">
+          <!-- Sidebar ad will be loaded here -->
+        </div>
+      </div>
+      
+      <div class="ad-container">
+        <span class="ad-label">AD</span>
+        <div id="sidebar-ad-content-2">
+          <!-- Second sidebar ad will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Ad -->
+  <div class="popup-ad" id="popupAd">
+    <span class="close" onclick="closePopup()">×</span>
+    <div class="ad-container">
+      <span class="ad-label">AD</span>
+      <div id="popup-ad-content">
+        <!-- Popup ad content will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p class="support-devs">I know it's annoying, but… support the devs ❤️</p>
+    <p>&copy; 2025 PirateHub. Premium accounts for premium pirates.</p>
+  </footer>
+
+  <script>
+    // Ad Blocker Detection
+    function detectAdBlock() {
+      return new Promise((resolve) => {
+        const ad = document.createElement('div');
+        ad.innerHTML = '&nbsp;';
+        ad.className = 'adsbox';
+        ad.style.position = 'absolute';
+        ad.style.top = '-100px';
+        ad.style.left = '-100px';
+        ad.style.height = '1px';
+        ad.style.width = '1px';
+        document.body.appendChild(ad);
+        
+        window.setTimeout(() => {
+          const isBlocked = ad.offsetHeight === 0;
+          document.body.removeChild(ad);
+          resolve(isBlocked);
+        }, 100);
+      });
+    }
+
+    // Check if ad blocker is enabled
+    async function checkAdBlock() {
+      const isAdBlockEnabled = await detectAdBlock();
+      if (isAdBlockEnabled) {
+        document.getElementById('adblockOverlay').style.display = 'flex';
+        // Track ad block usage for recovery revenue
+        trackAdBlockUser();
+      } else {
+        // Load ads if no ad blocker detected
+        loadAds();
+      }
+    }
+
+    // Track ad block users for recovery revenue
+    function trackAdBlockUser() {
+      // Here you would integrate with an adblock recovery service
+      // Such as Blockthrough, Admiral, or PageFair
+      console.log('Ad block user detected - potential for recovery revenue');
+      
+      // Example of setting a cookie to track this user
+      document.cookie = "adblock_user=true; max-age=2592000; path=/"; // 30 days
+    }
+
+    // Check again button
+    function checkAdBlockAgain() {
+      document.getElementById('adblockOverlay').style.display = 'none';
+      setTimeout(checkAdBlock, 1000);
+    }
+
+    // Geo-Targeting for Higher Value Traffic
+    function getHighValueGeo() {
+      // These countries typically have higher CPM rates
+      const highValueCountries = [
+        'United States', 'Canada', 'United Kingdom', 
+        'Australia', 'Germany', 'France', 'Switzerland',
+        'Norway', 'Sweden', 'Denmark', 'Netherlands'
+      ];
+      
+      // Use a geolocation API or service (in a real implementation)
+      // For demo purposes, we'll simulate this
+      const userCountry = simulateGeolocation();
+      
+      if (highValueCountries.includes(userCountry)) {
+        // Load premium ads for high-value countries
+        loadPremiumAdNetwork();
+        console.log('High-value country detected: ' + userCountry + ', loading premium ads');
+      } else {
+        // Load standard ads for other countries
+        loadStandardAdNetwork();
+        console.log('Standard country detected: ' + userCountry + ', loading standard ads');
+      }
+    }
+    
+    // Simulate geolocation for demo purposes
+    function simulateGeolocation() {
+      const countries = [
+        'United States', 'Canada', 'United Kingdom', 
+        'Australia', 'Germany', 'France', 'India',
+        'Brazil', 'Mexico', 'Japan', 'South Africa'
+      ];
+      return countries[Math.floor(Math.random() * countries.length)];
+    }
+
+    // Load different ad networks based on geo-targeting
+    function loadPremiumAdNetwork() {
+      // Implementation for premium ad networks
+      // Example: Google AdSense, Media.net, etc.
+      document.getElementById('header-ad-content').innerHTML = 'Premium Header Ad';
+      document.getElementById('sidebar-ad-content').innerHTML = 'Premium Sidebar Ad';
+      document.getElementById('sidebar-ad-content-2').innerHTML = 'Premium Sidebar Ad 2';
+      document.getElementById('popup-ad-content').innerHTML = 'Premium Popup Ad';
+      document.getElementById('video-ad-content').innerHTML = 'Premium Video Ad';
+    }
+    
+    function loadStandardAdNetwork() {
+      // Implementation for standard ad networks
+      document.getElementById('header-ad-content').innerHTML = 'Standard Header Ad';
+      document.getElementById('sidebar-ad-content').innerHTML = 'Standard Sidebar Ad';
+      document.getElementById('sidebar-ad-content-2').innerHTML = 'Standard Sidebar Ad 2';
+      document.getElementById('popup-ad-content').innerHTML = 'Standard Popup Ad';
+      document.getElementById('video-ad-content').innerHTML = 'Standard Video Ad';
+    }
+
+    // Show popup ad
+    function showPopupAd() {
+      setTimeout(() => {
+        document.getElementById('popupAd').style.display = 'block';
+      }, 15000); // Show after 15 seconds
+    }
+
+    // Close popup ad
+    function closePopup() {
+      document.getElementById('popupAd').style.display = 'none';
+    }
+
+    // Ad Refresh Control
+    function setupAdRefresh() {
+      // Refresh ads every 60 seconds (check network policies first)
+      setInterval(() => {
+        try {
+          console.log('Refreshing ads...');
+          // In a real implementation, this would refresh the ad units
+          // For demo, we'll just update the content
+          document.querySelectorAll('[id$="-content"]').forEach(el => {
+            if (el.innerHTML.includes('Ad')) {
+              el.innerHTML = el.innerHTML.replace('Ad', 'Refreshed Ad');
+            }
+          });
+        } catch (e) {
+          console.log('Ad refresh error:', e);
+        }
+      }, 60000); // 60 seconds
+    }
+
+    // Initialize ads
+    function loadAds() {
+      getHighValueGeo();
+      showPopupAd();
+      setupAdRefresh();
+      
+      // Set up popunder ad (would be implemented with a network like PropellerAds)
+      setupPopunderAd();
+    }
+
+    // Popunder Ad Implementation
+    function setupPopunderAd() {
+      // This would be implemented with a proper ad network
+      // For demo purposes, we'll simulate the behavior
+      window.addEventListener('click', function(e) {
+        // Only trigger on certain links or after a delay
+        if (e.target.tagName === 'A' && Math.random() > 0.7) {
+          console.log('Popunder ad would trigger now');
+          // In a real implementation, this would open a popunder
+        }
+      });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      checkAdBlock();
+      
+      // Show another popup after some time
+      setInterval(() => {
+        if (Math.random() > 0.7) {
+          document.getElementById('popupAd').style.display = 'block';
+        }
+      }, 120000); // Every 2 minutes
+    });
+  </script>
+</body>
+</html>

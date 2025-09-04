@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Games | PirateHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">
+      <i class="fas fa-skull-crossbones"></i>
+      <h1>PirateHub</h1>
+    </a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="all-games.html" class="active">All Games</a></li>
+      <li><a href="request-game.html">Request Game</a></li>
+      <li><a href="donate.html">Donate</a></li>
+    </ul>
+    <div class="search-container">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search games..." autocomplete="off">
+      <ul id="searchSuggestions" class="suggestions-box"></ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h2>All Games <i class="fas fa-gamepad"></i></h2>
+      <p>Browse our complete collection of premium games</p>
+    </section>
+
+    <!-- Filter Controls -->
+    <div class="filter-controls">
+      <div class="filter-group">
+        <label for="genreFilter">Filter by Genre:</label>
+        <select id="genreFilter">
+          <option value="all">All Genres</option>
+          <option value="action">Action</option>
+          <option value="rpg">RPG</option>
+          <option value="fps">FPS</option>
+          <option value="adventure">Adventure</option>
+          <option value="sports">Sports</option>
+          <option value="strategy">Strategy</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="sortFilter">Sort by:</label>
+        <select id="sortFilter">
+          <option value="popularity">Popularity</option>
+          <option value="newest">Newest</option>
+          <option value="alphabetical">Alphabetical</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Games Grid -->
+    <section class="section">
+      <h2><i class="fas fa-list"></i> Complete Collection</h2>
+      <div class="game-list">
+        <!-- Game Cards -->
+        <div class="game-card" data-genre="action" data-date="2023-04-15">
+          <a href="GTA-5.html">
+            <img src="https://oyster.ignimgs.com/mediawiki/apis.ign.com/grand-theft-auto-5/1/1d/Grand-theft-auto-v-banner.png?width=591&format=jpg&auto=webp&quality=80" alt="GTA V">
+            <h3>GTA V</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="rpg" data-date="2023-05-20">
+          <a href="cyberpunk.html">
+            <img src="https://cdn.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077">
+            <h3>Cyberpunk 2077</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="action" data-date="2023-03-10">
+          <a href="rdr2.html">
+            <img src="https://images.squarespace-cdn.com/content/v1/54e310f0e4b0f4a6ba3ac899/a8ad450f-4e91-478d-85a7-14eef0b75fef/Red+Dead+Redemption+2+Banner+650.jpg?format=1500w" alt="RDR2">
+            <h3>Red Dead Redemption 2</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="fps" data-date="2023-06-05">
+          <a href="cod-mw2.html">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/10180/header.jpg" alt="MW2">
+            <h3>Call of Duty: MW2</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="action" data-date="2023-02-18">
+          <a href="watchdogs.html">
+            <img src="https://cdn2.unrealengine.com/Diesel%2Fproductv2%2Fwatch-dogs%2Fhome%2FWDOG_STD_Store_Landscape_2580x1450-2580x1450-faf11f76438b5ec516195323bc6c5402d1812d7c.jpg" alt="Watch Dogs">
+            <h3>Watch Dogs</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="rpg" data-date="2023-07-12">
+          <a href="elden-ring.html">
+            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/aGhopp3MHppi7ekNAJNI6Idt.png" alt="Elden Ring">
+            <h3>Elden Ring</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="adventure" data-date="2023-01-25">
+          <a href="hogwarts-legacy.html">
+            <img src="https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_HogwartsLegacy_AvalancheSoftware_S2_1200x1600-7e2c9e7db83d2b2d6c7d5b5e87b85abe" alt="Hogwarts Legacy">
+            <h3>Hogwarts Legacy</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="action" data-date="2023-08-08">
+          <a href="spiderman.html">
+            <img src="https://image.api.playstation.com/vulcan/ap/rnd/202008/1020/8a8dY2X6fHtcpROcULOMe4w3.png" alt="Spider-Man">
+            <h3>Spider-Man: Miles Morales</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="rpg" data-date="2023-05-03">
+          <a href="witcher3.html">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg" alt="The Witcher 3">
+            <h3>The Witcher 3</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="fps" data-date="2023-04-30">
+          <a href="doom-eternal.html">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/782330/header.jpg" alt="Doom Eternal">
+            <h3>Doom Eternal</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="sports" data-date="2023-06-22">
+          <a href="fifa23.html">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/1811260/header.jpg" alt="FIFA 23">
+            <h3>FIFA 23</h3>
+          </a>
+        </div>
+
+        <div class="game-card" data-genre="strategy" data-date="2023-07-30">
+          <a href="civilization6.html">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/289070/header.jpg" alt="Civilization VI">
+            <h3>Civilization VI</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button class="page-btn disabled"><i class="fas fa-chevron-left"></i> Previous</button>
+      <div class="page-numbers">
+        <span class="page-active">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <span>...</span>
+        <a href="#">10</a>
+      </div>
+      <button class="page-btn">Next <i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p class="support-devs">I know it's annoying, but… support the devs ❤️</p>
+    <p>&copy; 2025 PirateHub. No loot, no boot. Powered by memes and megabytes.</p>
+  </footer>
+
+  <script>
+    // Basic search functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      const suggestionsBox = document.getElementById('searchSuggestions');
+      const gameCards = document.querySelectorAll('.game-card');
+      
+      // Show suggestions when typing
+      searchInput.addEventListener('input', function() {
+        const value = this.value.toLowerCase();
+        
+        if (value.length > 1) {
+          // Filter games based on input
+          const filteredGames = Array.from(gameCards).filter(card => {
+            const gameName = card.querySelector('h3').textContent.toLowerCase();
+            return gameName.includes(value);
+          });
+          
+          // Update suggestions
+          suggestionsBox.innerHTML = '';
+          filteredGames.forEach(card => {
+            const gameName = card.querySelector('h3').textContent;
+            const li = document.createElement('li');
+            li.textContent = gameName;
+            li.addEventListener('click', () => {
+              window.location.href = card.querySelector('a').href;
+            });
+            suggestionsBox.appendChild(li);
+          });
+          
+          suggestionsBox.style.display = filteredGames.length ? 'block' : 'none';
+        } else {
+          suggestionsBox.style.display = 'none';
+        }
+      });
+      
+      // Hide suggestions when clicking outside
+      document.addEventListener('click', function(e) {
+        if (e.target !== searchInput) {
+          suggestionsBox.style.display = 'none';
+        }
+      });
+      
+      // Filter functionality
+      const genreFilter = document.getElementById('genreFilter');
+      const sortFilter = document.getElementById('sortFilter');
+      
+      function filterGames() {
+        const genreValue = genreFilter.value;
+        
+        gameCards.forEach(card => {
+          if (genreValue === 'all' || card.getAttribute('data-genre') === genreValue) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Simple sort implementation
+        const gameList = document.querySelector('.game-list');
+        const cards = Array.from(gameCards).filter(card => card.style.display !== 'none');
+        
+        if (sortFilter.value === 'alphabetical') {
+          cards.sort((a, b) => {
+            const aName = a.querySelector('h3').textContent;
+            const bName = b.querySelector('h3').textContent;
+            return aName.localeCompare(bName);
+          });
+        } else if (sortFilter.value === 'newest') {
+          cards.sort((a, b) => {
+            const aDate = new Date(a.getAttribute('data-date'));
+            const bDate = new Date(b.getAttribute('data-date'));
+            return bDate - aDate;
+          });
+        }
+        
+        // Re-append sorted cards
+        cards.forEach(card => gameList.appendChild(card));
+      }
+      
+      genreFilter.addEventListener('change', filterGames);
+      sortFilter.addEventListener('change', filterGames);
+    });
+  </script>
+</body>
+</html>

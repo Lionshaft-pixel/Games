@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request a Game - PirateHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">
+      <i class="fas fa-skull-crossbones"></i>
+      <h1>PirateHub</h1>
+    </a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="all-games.html">All Games</a></li>
+      <li><a href="request-game.html" class="active">Request Game</a></li>
+      <li><a href="donate.html">Donate</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="page-header">
+      <h2><i class="fas fa-envelope"></i> Request a Game</h2>
+      <p>Have a game in mind? Let us know and we'll try to upload it. 🕹️</p>
+    </div>
+
+    <form class="request-form">
+      <div class="form-group">
+        <label for="gameTitle">Game Title</label>
+        <input type="text" id="gameTitle" placeholder="Enter game title (required)" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="gamePlatform">Platform</label>
+        <select id="gamePlatform">
+          <option value="">Select platform (optional)</option>
+          <option value="pc">PC</option>
+          <option value="ps4">PlayStation 4</option>
+          <option value="ps5">PlayStation 5</option>
+          <option value="xbox-one">Xbox One</option>
+          <option value="xbox-series">Xbox Series X/S</option>
+          <option value="switch">Nintendo Switch</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="gameMessage">Additional Details</label>
+        <textarea id="gameMessage" placeholder="Anything else you wanna say? (optional)" rows="4"></textarea>
+      </div>
+      
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-paper-plane"></i> Send Request
+      </button>
+    </form>
+    
+    <p class="note">
+      <i class="fas fa-clock"></i> Requests may take 2–4 days to be added since the pirate captain is a bit busy.
+    </p>
+  </div>
+
+  <footer>
+    <p class="support-devs">I know it's annoying, but… support the devs ❤️</p>
+    <p>&copy; 2025 PirateHub. You request, we deliver (eventually).</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('.request-form');
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const gameTitle = document.getElementById('gameTitle').value;
+        
+        if (gameTitle.trim() === '') {
+          alert('Please enter a game title!');
+          return;
+        }
+        
+        // Simulate form submission
+        alert(`Thanks for requesting "${gameTitle}"! We'll try to add it soon.`);
+        form.reset();
+      });
+    });
+  </script>
+</body>
+</html>
