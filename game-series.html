@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Games | PirateHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">
+      <i class="fas fa-skull-crossbones"></i>
+      <h1>PirateHub</h1>
+    </a>
+    <ul>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/all-games.html" class="active">All Games</a></li>
+      <li><a href="/steam-accounts.html">Steam Accounts!</a></li>
+      <li><a href="/request-game.html">Request Game</a></li>
+      <li><a href="/donate.html">Donate</a></li>
+    </ul>
+    <div class="search-container">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search games..." autocomplete="off">
+      <ul id="searchSuggestions" class="suggestions-box"></ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h2>Game Series</h2>
+    </section>
+
+    <!-- Games Grid -->
+    <section class="section">
+      <div class="game-list">
+        <!-- Game Cards -->
+        <div class="game-card" data-genre="action" data-date="2023-04-15">
+          <a href="series/far-cry-series.html">
+            <img src="https://i.ytimg.com/vi/fIIL3v8TgOE/sddefault.jpg" alt="GTA V">
+            <h3>Far Cry</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  <!-- Footer -->
+  <footer>
+    <p class="support-devs">I know it's annoying, but… support the devs ❤️</p>
+    <p>&copy; 2025 PirateHub. No loot, no boot. Powered by memes and megabytes.</p>
+  </footer>
+
+  <script>
+    // Basic search functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      const suggestionsBox = document.getElementById('searchSuggestions');
+      const gameCards = document.querySelectorAll('.game-card');
+      
+      // Show suggestions when typing
+      searchInput.addEventListener('input', function() {
+        const value = this.value.toLowerCase();
+        
+        if (value.length > 1) {
+          // Filter games based on input
+          const filteredGames = Array.from(gameCards).filter(card => {
+            const gameName = card.querySelector('h3').textContent.toLowerCase();
+            return gameName.includes(value);
+          });
+          
+          // Update suggestions
+          suggestionsBox.innerHTML = '';
+          filteredGames.forEach(card => {
+            const gameName = card.querySelector('h3').textContent;
+            const li = document.createElement('li');
+            li.textContent = gameName;
+            li.addEventListener('click', () => {
+              window.location.href = card.querySelector('a').href;
+            });
+            suggestionsBox.appendChild(li);
+          });
+          
+          suggestionsBox.style.display = filteredGames.length ? 'block' : 'none';
+        } else {
+          suggestionsBox.style.display = 'none';
+        }
+      });
+      
+      // Hide suggestions when clicking outside
+      document.addEventListener('click', function(e) {
+        if (e.target !== searchInput) {
+          suggestionsBox.style.display = 'none';
+        }
+      });
+      
+      // Filter functionality
+      const genreFilter = document.getElementById('genreFilter');
+      const sortFilter = document.getElementById('sortFilter');
+      
+      function filterGames() {
+        const genreValue = genreFilter.value;
+        
+        gameCards.forEach(card => {
+          if (genreValue === 'all' || card.getAttribute('data-genre') === genreValue) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Simple sort implementation
+        const gameList = document.querySelector('.game-list');
+        const cards = Array.from(gameCards).filter(card => card.style.display !== 'none');
+        
+        if (sortFilter.value === 'alphabetical') {
+          cards.sort((a, b) => {
+            const aName = a.querySelector('h3').textContent;
+            const bName = b.querySelector('h3').textContent;
+            return aName.localeCompare(bName);
+          });
+        } else if (sortFilter.value === 'newest') {
+          cards.sort((a, b) => {
+            const aDate = new Date(a.getAttribute('data-date'));
+            const bDate = new Date(b.getAttribute('data-date'));
+            return bDate - aDate;
+          });
+        }
+        
+        // Re-append sorted cards
+        cards.forEach(card => gameList.appendChild(card));
+      }
+      
+      genreFilter.addEventListener('change', filterGames);
+      sortFilter.addEventListener('change', filterGames);
+    });
+  </script>
+</body>
+</html>
